@@ -21,11 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    /**
-     * List of all recipes
-     * @todo fetch this from https://raspberry-cook.fr
-     */
-    private List<Recipe> recipes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +49,10 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        recipes = new ArrayList<Recipe>();
-        recipes.add(new Recipe("Tarte aux pommes"));
-        recipes.add(new Recipe("Boudin aux pommes"));
-        recipes.add(new Recipe("Riz de veau"));
-        // create a new
-        ListView listRecipe = (ListView) findViewById(R.id.listRecipe);
-        final RecipeAdapter adapter = new RecipeAdapter(MainActivity.this, recipes);
-        listRecipe.setAdapter(adapter);
 
+        // create a new
+        ListViewRecipes listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
+        listRecipe.loadRecipes(MainActivity.this);
     }
 
     @Override
