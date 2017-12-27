@@ -12,13 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * List of all recipes
+     * @todo fetch this from https://raspberry-cook.fr
+     */
+    private List<Recipe> recipes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,6 +50,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        super.onCreate(savedInstanceState);
+
+        recipes = new ArrayList<Recipe>();
+        recipes.add(new Recipe("Tarte aux pommes"));
+        recipes.add(new Recipe("Boudin aux pommes"));
+        recipes.add(new Recipe("Riz de veau"));
+        // create a new
+        ListView listRecipe = (ListView) findViewById(R.id.listRecipe);
+        final RecipeAdapter adapter = new RecipeAdapter(MainActivity.this, recipes);
+        listRecipe.setAdapter(adapter);
+
     }
 
     @Override
@@ -50,6 +72,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
     }
 
     @Override
