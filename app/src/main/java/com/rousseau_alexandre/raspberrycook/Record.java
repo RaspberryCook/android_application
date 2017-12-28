@@ -1,40 +1,83 @@
 package com.rousseau_alexandre.raspberrycook;
 
+import android.content.ContentValues;
 import android.content.Context;
-
-import java.util.List;
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Represent an object who can be saved into Database
  */
-public interface Record {
+public abstract class Record {
+
+    /**
+     * Name of SQL table
+     *
+     * @todo find a way to rewritte in in child class
+     */
+    public static String TABLE_NAME = "recipes";
+
+    public long id;
 
     /**
      * Save the given record into database
      *
+     * @param context
      * @return `true` if success
      */
-    public boolean save(Context context);
+    public boolean save(Context context) {
+        int countRows =getDatabase(context).update(
+                TABLE_NAME,
+                toContentValues(),
+                "id =",
+                new String[]{Long.toString(id)}
+        );
+
+        return countRows == 1;
+    }
 
     /**
      * Insert given record into database
      *
+     * @param context
      * @return `true` if success
      */
-    public boolean insert(Context context);
+    public boolean insert(Context context) {
+        long newId = getDatabase(context).insert(TABLE_NAME, null, toContentValues());
+        if(newId == -1){
+            return false;
+        }else{
+            id = newId;
+            return true;
+        }
+    }
 
     /**
      * Remove given record into database
      *
+     * @param context
      * @return `true` if success
      */
-    public boolean delete(Context context);
+    public boolean delete(Context context) {
+        return false;
+    }
 
     /**
      * Synchronise given record from https://raspberry-cook.fr
      *
+     * @param context
      * @return `true` if success
      */
-    public boolean synchronise(Context context);
+    public boolean synchronise(Context context) {
+        return false;
+    }
+
+    protected ContentValues toContentValues() {
+        return new ContentValues();
+    }
+
+    private SQLiteDatabase getDatabase(Context context) {
+        MySQLiteHelper helper = new MySQLiteHelper(context);
+        return helper.getWritableDatabase();
+    }
 
 }
