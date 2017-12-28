@@ -2,7 +2,10 @@ package com.rousseau_alexandre.raspberrycook;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.List;
 
 /**
  * Represent an object who can be saved into Database
@@ -16,7 +19,9 @@ public abstract class Record {
      */
     public static String TABLE_NAME = "recipes";
 
-    public long id;
+    protected long id;
+
+
 
     /**
      * Save the given record into database
@@ -75,7 +80,7 @@ public abstract class Record {
         return new ContentValues();
     }
 
-    private SQLiteDatabase getDatabase(Context context) {
+    protected static SQLiteDatabase getDatabase(Context context) {
         MySQLiteHelper helper = new MySQLiteHelper(context);
         return helper.getWritableDatabase();
     }

@@ -10,6 +10,11 @@ import junit.framework.TestCase;
 
 public class RecipeUnitTest extends TestCase {
 
+    public void testAll(){
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        assertEquals(countRows("recipes"), Recipe.all(appContext).size());
+    }
+
     public void testInsert() {
         Context appContext = InstrumentationRegistry.getTargetContext();
         int initialCount = countRows("recipes");
