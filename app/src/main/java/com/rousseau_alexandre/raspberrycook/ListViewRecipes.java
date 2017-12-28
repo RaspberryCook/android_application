@@ -40,13 +40,7 @@ public class ListViewRecipes extends ListView {
      * @param context
      */
     public void loadRecipes(Context context){
-        //
-        recipes = new ArrayList<Recipe>();
-        recipes.add(new Recipe("Tarte aux pommes"));
-        recipes.add(new Recipe("Boudin aux pommes"));
-        recipes.add(new Recipe("Riz de veau"));
-
-        final RecipeAdapter adapter = new RecipeAdapter(context, recipes);
+        final RecipeAdapter adapter = new RecipeAdapter(context, Recipe.all(context));
         setAdapter(adapter);
     }
 }
