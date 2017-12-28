@@ -23,5 +23,5 @@ public class MySQLiteHelperUnitTest extends TestCase {
         // check if azaz table is created
         cursor = database.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='azaz'", null);
         assertSame(0, cursor.getCount());
-        }
+    }
 }
