@@ -1,6 +1,6 @@
 package com.rousseau_alexandre.raspberrycook;
 
-import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +17,9 @@ import android.widget.AdapterView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String EXTRA_RECIPE = "com.rousseau_alexandre.raspberrycook.RECIPE";
+
 
 
 
@@ -55,10 +58,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe recipe = (Recipe) listRecipe.getItemAtPosition(position);
-                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
-                adb.setTitle("Recipe selected");
-                adb.setMessage(recipe.name);
-                adb.show();
+                Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+                intent.putExtra(EXTRA_RECIPE, recipe);
+                startActivity(intent);
+
             }
         });
     }
@@ -120,4 +123,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
