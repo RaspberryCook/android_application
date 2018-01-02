@@ -1,5 +1,6 @@
 package com.rousseau_alexandre.raspberrycook;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,11 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.AdapterView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,8 +48,19 @@ public class MainActivity extends AppCompatActivity
 
 
         // create a new
-        ListViewRecipes listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
+        final ListViewRecipes listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
         listRecipe.loadRecipes(MainActivity.this);
+        listRecipe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Recipe recipe = (Recipe) listRecipe.getItemAtPosition(position);
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+                adb.setTitle("Recipe selected");
+                adb.setMessage(recipe.name);
+                adb.show();
+            }
+        });
     }
 
     @Override
