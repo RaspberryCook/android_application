@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Recipe extends Record implements Serializable{
 
-    protected long id;
     public String name;
 
 
@@ -47,10 +46,6 @@ public class Recipe extends Record implements Serializable{
         return false;
     }
 
-    @Override
-    public boolean delete(Context context) {
-        return false;
-    }
 
     @Override
     public boolean synchronise(Context context) {

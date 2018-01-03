@@ -33,7 +33,7 @@ public abstract class Record {
         int countRows =getDatabase(context).update(
                 TABLE_NAME,
                 toContentValues(),
-                "id =",
+                "id = ?",
                 new String[]{Long.toString(id)}
         );
 
@@ -63,7 +63,14 @@ public abstract class Record {
      * @return `true` if success
      */
     public boolean delete(Context context) {
-        return false;
+        System.out.println("Try to delete with id = " + id);
+        int count = getDatabase(context).delete(
+                TABLE_NAME,
+                "id = ?",
+                new String[]{Long.toString(id)}
+        );
+
+        return count > 0;
     }
 
     /**

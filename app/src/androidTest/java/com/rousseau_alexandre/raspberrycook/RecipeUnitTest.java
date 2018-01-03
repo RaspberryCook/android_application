@@ -25,6 +25,19 @@ public class RecipeUnitTest extends TestCase {
         assertEquals("Recipe was not added", initialCount + 1, countRows("recipes"));
     }
 
+    public void testDelete() {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        int initialCount = countRows("recipes");
+
+        Recipe recipe = new Recipe("Gigot");
+        assertTrue(recipe.insert(appContext));
+
+        assertEquals("Recipe was not added", initialCount + 1, countRows("recipes"));
+
+        assertTrue(recipe.delete(appContext));
+        assertEquals("Recipe was not deleted", initialCount, countRows("recipes"));
+    }
+
     public void testUpdate() {
         Context appContext = InstrumentationRegistry.getTargetContext();
         int initialCount = countRows("recipes", "name", "Renamed");

@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe recipe = (Recipe) listRecipe.getItemAtPosition(position);
+                System.out.println("Recipe loaded with id = " + recipe.id);
                 Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
                 intent.putExtra(EXTRA_RECIPE, recipe);
                 startActivity(intent);
