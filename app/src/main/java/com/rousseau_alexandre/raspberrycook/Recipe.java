@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,21 @@ import java.util.List;
 public class Recipe extends Record {
 
     public String name;
+    public long user_id;
+    public Date created_at;
+    public String description;
+    public String ingredients;
+    public String steps;
+    public String season;
+    public String photo;
+    public String image;
+    public long root_recipe_id = 0;
+    public String variant_name;
+    public String varchar;
+    public int baking = 0;
+    public int cooling = 0;
+    public int rest = 0;
+    public int cooking = 0;
 
 
     public Recipe(String _name) {
