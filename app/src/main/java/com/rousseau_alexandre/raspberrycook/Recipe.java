@@ -5,14 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represent a recipe from raspberry-cook.fr
  */
-public class Recipe extends Record implements Serializable{
+public class Recipe extends Record {
 
     public String name;
 

@@ -2,9 +2,7 @@ package com.rousseau_alexandre.raspberrycook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -28,7 +26,7 @@ public class RecipeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(recipe.delete(RecipeActivity.this));
+                recipe.delete(RecipeActivity.this);
                 finish();
             }
         });

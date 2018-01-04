@@ -2,15 +2,14 @@ package com.rousseau_alexandre.raspberrycook;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Represent an object who can be saved into Database
  */
-public abstract class Record {
+public abstract class Record implements Serializable {
 
     /**
      * Name of SQL table
