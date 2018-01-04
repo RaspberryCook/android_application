@@ -1,7 +1,6 @@
 package com.rousseau_alexandre.raspberrycook;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,9 @@ import java.util.List;
 
 /**
  * Adapter for list or recipes
- * @see github.com/florent37/TutosAndroidFrance/tree/master/ListViewSample
- *      http://tutos-android-france.com/listview-afficher-une-liste-delements/
+ *
+ * https://github.com/florent37/TutosAndroidFrance/tree/master/ListViewSample
+ * http://tutos-android-france.com/listview-afficher-une-liste-delements/
  */
 public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
@@ -33,7 +33,6 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
         if(viewHolder == null){
             viewHolder = new RecipeViewHolder();
-            viewHolder.id = (TextView) convertView.findViewById(R.id.id);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             convertView.setTag(viewHolder);
         }
@@ -43,13 +42,18 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
         // il ne reste plus qu'à remplir notre vue
         viewHolder.name.setText(recipe.name);
-        viewHolder.id.setText(Long.toString(recipe.id));
 
         return convertView;
     }
 
+    public void reload() {
+        clear();
+        addAll(Recipe.all(getContext()));
+        System.out.println("ListView reloaded");
+        notifyDataSetChanged();
+    }
+
     private class RecipeViewHolder {
-        public TextView id;
         public TextView name;
     }
 }

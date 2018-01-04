@@ -3,7 +3,6 @@ package com.rousseau_alexandre.raspberrycook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +20,12 @@ public class MainActivity extends AppCompatActivity
     public static final String EXTRA_RECIPE = "com.rousseau_alexandre.raspberrycook.RECIPE";
 
 
+    protected ListViewRecipes listRecipe;
+
+    public void refreshListViewRecipe() {
+        RecipeAdapter adapter = (RecipeAdapter) listRecipe.getAdapter();
+        adapter.reload();
+    }
 
 
     @Override
@@ -50,18 +55,16 @@ public class MainActivity extends AppCompatActivity
 
 
         // create a new
-        final ListViewRecipes listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
+        listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
         listRecipe.loadRecipes(MainActivity.this);
         listRecipe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe recipe = (Recipe) listRecipe.getItemAtPosition(position);
-                System.out.println("Recipe loaded with id = " + recipe.id);
                 Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
                 intent.putExtra(EXTRA_RECIPE, recipe);
                 startActivity(intent);
-
             }
         });
     }
@@ -122,6 +125,15 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        RecipeAdapter adapter = (RecipeAdapter) listRecipe.getAdapter();
+        adapter.reload();
+        System.out.println("onResume called");
     }
 
 
