@@ -23,12 +23,18 @@ public class NewRecipeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final EditText name = (EditText) findViewById(R.id.nameText);
+        final EditText description = (EditText) findViewById(R.id.descriptionText);
+        final EditText steps = (EditText) findViewById(R.id.stepsText);
+        final EditText ingredients = (EditText) findViewById(R.id.ingredientsText);
         Button btnSubmit = (Button) findViewById(R.id.submitButton);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Recipe recipe = new Recipe(name.getText().toString());
+                recipe.setDescription(description.getText().toString());
+                recipe.setSteps(steps.getText().toString());
+                recipe.setIngredients(ingredients.getText().toString());
                 recipe.insert(NewRecipeActivity.this);
                 finish();
             }

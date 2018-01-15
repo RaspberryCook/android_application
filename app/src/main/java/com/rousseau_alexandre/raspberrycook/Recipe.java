@@ -41,19 +41,43 @@ public class Recipe extends Record {
         id = _id;
     }
 
+    /**
+     * Cursor obtened from this kind of query `SELECT id, name, description, ingredients, steps FROM recipes`
+     * @param cursor
+     */
+    public Recipe(Cursor cursor) {
+        id = cursor.getLong(0);
+        name = cursor.getString(1);
+        description = cursor.getString(2);
+        ingredients = cursor.getString(3);
+        steps = cursor.getString(4);
+    }
+
     public static List<Recipe> all(Context context) {
         SQLiteDatabase database = getDatabase(context);
-        Cursor cursor = database.rawQuery("SELECT id, name FROM " + TABLE_NAME, null);
+        Cursor cursor = database.rawQuery("SELECT id, name, description, ingredients, steps FROM " + TABLE_NAME, null);
 
 
         List<Recipe> recipes = new ArrayList<>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            recipes.add(new Recipe(cursor.getLong(0), cursor.getString(1)));
+            recipes.add(new Recipe(cursor));
             cursor.moveToNext();
         }
 
         return recipes;
+    }
+
+    public void setDescription(String _description) {
+        description = _description;
+    }
+
+    public void setSteps(String _steps) {
+        steps = _steps;
+    }
+
+    public void setIngredients(String _ingredients) {
+        ingredients = _ingredients;
     }
 
     @Override
@@ -70,6 +94,9 @@ public class Recipe extends Record {
     protected ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put("name", name);
+        values.put("description", description);
+        values.put("ingredients", ingredients);
+        values.put("steps", steps);
         return values;
     }
 
