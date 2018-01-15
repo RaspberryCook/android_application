@@ -68,12 +68,24 @@ public class Recipe extends Record {
         return recipes;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String _description) {
         description = _description;
     }
 
+    public String getSteps() {
+        return steps;
+    }
+
     public void setSteps(String _steps) {
         steps = _steps;
+    }
+
+    public String getIngredients() {
+        return ingredients;
     }
 
     public void setIngredients(String _ingredients) {

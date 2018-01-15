@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -21,6 +22,10 @@ public class RecipeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(recipe.getTitle());
         setSupportActionBar(toolbar);
+
+        ((TextView) findViewById(R.id.descriptionText)).setText(recipe.getDescription());
+        ((TextView) findViewById(R.id.stepsText)).setText(recipe.getSteps());
+        ((TextView) findViewById(R.id.ingredientsText)).setText(recipe.getIngredients());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
