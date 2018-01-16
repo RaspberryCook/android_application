@@ -1,8 +1,8 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,13 +12,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+
+import com.rousseau_alexandre.raspberrycook.R;
+import com.rousseau_alexandre.raspberrycook.models.Recipe;
+import com.rousseau_alexandre.raspberrycook.models.RecipeAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String EXTRA_RECIPE = "com.rousseau_alexandre.raspberrycook.RECIPE";
+
+
+    protected ListViewRecipes listRecipe;
+
+    public void refreshListViewRecipe() {
+        RecipeAdapter adapter = (RecipeAdapter) listRecipe.getAdapter();
+        adapter.reload();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -27,8 +42,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, NewRecipeActivity.class));
             }
         });
 
@@ -40,6 +54,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        super.onCreate(savedInstanceState);
+
+
+        // create a new
+        listRecipe = (ListViewRecipes) findViewById(R.id.listRecipe);
+        listRecipe.loadRecipes(MainActivity.this);
+        listRecipe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Recipe recipe = (Recipe) listRecipe.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+                intent.putExtra(EXTRA_RECIPE, recipe);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -98,4 +129,18 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    /**
+     * Reload list view on back pressed
+     */
+    @Override
+    protected void onResume(){
+        super.onResume();
+        RecipeAdapter adapter = (RecipeAdapter) listRecipe.getAdapter();
+        adapter.reload();
+        System.out.println("onResume called");
+    }
+
+
 }
