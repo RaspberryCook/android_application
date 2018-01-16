@@ -12,25 +12,24 @@ import android.widget.TextView;
 
 import com.rousseau_alexandre.raspberrycook.R;
 import com.rousseau_alexandre.raspberrycook.models.Recipe;
+import com.rousseau_alexandre.raspberrycook.models.RecipeAdapter;
+
+import static com.rousseau_alexandre.raspberrycook.controllers.MainActivity.EXTRA_RECIPE;
 
 public class RecipeActivity extends AppCompatActivity {
+
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        final Recipe recipe = getRecipe();
-        System.out.println("Recipe loaded with id = " + recipe.getId());
 
-        // set toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(recipe.getTitle());
-        setSupportActionBar(toolbar);
+        Intent intent = getIntent();
+        recipe = (Recipe) intent.getSerializableExtra(EXTRA_RECIPE);
 
-        ((TextView) findViewById(R.id.descriptionText)).setText(recipe.getDescription());
-        ((TextView) findViewById(R.id.stepsText)).setText(recipe.getSteps());
-        ((TextView) findViewById(R.id.ingredientsText)).setText(recipe.getIngredients());
+        loadRecipeData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,12 +41,16 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
     /**
-     * Fetch recipe from intent
-     * @return
+     * Set recipe
      */
-    private Recipe getRecipe(){
-        Intent intent = getIntent();
-        return (Recipe) intent.getSerializableExtra(MainActivity.EXTRA_RECIPE);
+    private void loadRecipeData() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(recipe.getTitle());
+        setSupportActionBar(toolbar);
+
+        ((TextView) findViewById(R.id.descriptionText)).setText(recipe.getDescription());
+        ((TextView) findViewById(R.id.stepsText)).setText(recipe.getSteps());
+        ((TextView) findViewById(R.id.ingredientsText)).setText(recipe.getIngredients());
     }
 
     @Override
@@ -58,15 +61,22 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Handle item selection
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.editMenuItem:
                 // newGame();
+                Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
+                intent.putExtra(EXTRA_RECIPE, recipe);
+                startActivity(intent);
                 return true;
             case R.id.deleteMenuItem:
-                getRecipe().delete(RecipeActivity.this);
+                recipe.delete(RecipeActivity.this);
                 finish();
                 return true;
             default:
@@ -74,4 +84,11 @@ public class RecipeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        long id = recipe.getId();
+        recipe = Recipe.get(RecipeActivity.this, id);
+        loadRecipeData();
+    }
 }

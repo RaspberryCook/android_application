@@ -27,6 +27,10 @@
             android:name=".controllers.NewRecipeActivity"
             android:label="@string/title_activity_new_recipe"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".controllers.EditRecipeActivity"
+            android:label="@string/title_activity_edit_recipe"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

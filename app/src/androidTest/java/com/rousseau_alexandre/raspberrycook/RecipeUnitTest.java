@@ -28,6 +28,17 @@ public class RecipeUnitTest extends TestCase {
         assertEquals("Recipe was not added", initialCount + 1, countRows("recipes"));
     }
 
+    public void testGet() {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Recipe recipe = new Recipe("Gigot");
+        recipe.insert(appContext);
+
+        Recipe recipeFounded = Recipe.get(appContext, recipe.getId());
+
+        assertEquals("Recipe was finded", recipe.getName(), recipeFounded.getName());
+    }
+
     public void testDelete() {
         Context appContext = InstrumentationRegistry.getTargetContext();
         int initialCount = countRows("recipes");

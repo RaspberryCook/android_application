@@ -68,8 +68,25 @@ public class Recipe extends Record {
         return recipes;
     }
 
+    public static Recipe get(Context context, long id) {
+        SQLiteDatabase database = getDatabase(context);
+        String sql = String.format("SELECT id, name, description, ingredients, steps FROM %s WHERE id = ?", TABLE_NAME);
+        Cursor cursor = database.rawQuery(sql, new String[]{Long.toString(id)});
+        cursor.moveToFirst();
+
+        return new Recipe(cursor);
+    }
+
     public long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String _name) {
+        name = _name;
     }
 
     public String getDescription() {
@@ -95,12 +112,6 @@ public class Recipe extends Record {
     public void setIngredients(String _ingredients) {
         ingredients = _ingredients;
     }
-
-    @Override
-    public boolean save(Context context) {
-        return false;
-    }
-
 
     @Override
     public boolean synchronise(Context context) {

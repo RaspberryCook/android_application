@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-
     }
 
     @Override
@@ -132,6 +131,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Reload list view on back pressed
+     */
     @Override
     protected void onResume(){
         super.onResume();
