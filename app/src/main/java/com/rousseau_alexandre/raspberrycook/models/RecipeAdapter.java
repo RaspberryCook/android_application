@@ -1,4 +1,4 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.models;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.rousseau_alexandre.raspberrycook.R;
+import com.rousseau_alexandre.raspberrycook.models.Recipe;
 
 import java.util.List;
 

@@ -1,8 +1,11 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.controllers;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
+
+import com.rousseau_alexandre.raspberrycook.models.Recipe;
+import com.rousseau_alexandre.raspberrycook.models.RecipeAdapter;
 
 import java.util.List;
 

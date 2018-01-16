@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 
+import com.rousseau_alexandre.raspberrycook.models.MySQLiteHelper;
+
 import junit.framework.TestCase;
 
 

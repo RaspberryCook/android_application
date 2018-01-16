@@ -1,4 +1,4 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+
+import com.rousseau_alexandre.raspberrycook.R;
+import com.rousseau_alexandre.raspberrycook.models.Recipe;
+import com.rousseau_alexandre.raspberrycook.models.RecipeAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

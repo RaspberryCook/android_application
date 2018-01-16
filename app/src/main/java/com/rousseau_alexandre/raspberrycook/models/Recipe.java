@@ -1,4 +1,4 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.models;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -66,6 +66,10 @@ public class Recipe extends Record {
         }
 
         return recipes;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getDescription() {

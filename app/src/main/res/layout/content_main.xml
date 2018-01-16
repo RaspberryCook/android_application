@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.rousseau_alexandre.raspberrycook.MainActivity"
+    tools:context="com.rousseau_alexandre.raspberrycook.controllers.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <com.rousseau_alexandre.raspberrycook.ListViewRecipes
+    <com.rousseau_alexandre.raspberrycook.controllers.ListViewRecipes
         android:id="@+id/listRecipe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

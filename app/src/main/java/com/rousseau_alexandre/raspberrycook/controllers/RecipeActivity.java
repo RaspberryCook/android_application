@@ -1,4 +1,4 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.rousseau_alexandre.raspberrycook.R;
+import com.rousseau_alexandre.raspberrycook.models.Recipe;
+
 public class RecipeActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +21,7 @@ public class RecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe);
 
         final Recipe recipe = getRecipe();
-        System.out.println("Recipe loaded with id = " + recipe.id);
+        System.out.println("Recipe loaded with id = " + recipe.getId());
 
         // set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -1,8 +1,10 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.models;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.rousseau_alexandre.raspberrycook.models.MySQLiteHelper;
 
 import java.io.Serializable;
 

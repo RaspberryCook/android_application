@@ -1,4 +1,4 @@
-package com.rousseau_alexandre.raspberrycook;
+package com.rousseau_alexandre.raspberrycook.models;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
